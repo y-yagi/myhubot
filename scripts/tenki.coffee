@@ -2,10 +2,7 @@ jsdom = require 'jsdom'
 
 module.exports = (robot) ->
   robot.respond /天気 (.*)$/i, (msg) ->
-    adapter  = msg.robot.adapter
-    envelope = msg.envelope
-
-    new_line = "<br>"
+    new_line = "\n"
     api_url = 'http://weather.livedoor.com/forecast/rss/warn/'
     [area] = [msg.match[1]]
 
@@ -23,10 +20,10 @@ module.exports = (robot) ->
 
     area_id = areas[area]
     unless area_id?
-      adapter.sendHTML envelope, "#{area}という場所は無いよ! 都道府県を指定してね!"
+      msg.send "#{area}という場所は無いよ! 都道府県を指定してね!"
       return
 
-    adapter.sendHTML envelope, 'ちょっと待ってね...'
+    msg.send 'ちょっと待ってね...'
 
     msg.http(api_url + area_id + ".xml")
        .get() (err, res, body) ->
@@ -47,5 +44,5 @@ module.exports = (robot) ->
           catch err
                 msg.send err
 
-          adapter.sendHTML "「#{area}」の警報・注意報発表情報"
-          adapter.sendHTML reply
+          msg.send "「#{area}」の警報・注意報発表情報"
+          msg.send reply

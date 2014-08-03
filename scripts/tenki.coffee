@@ -29,7 +29,7 @@ module.exports = (robot) ->
        .get() (err, res, body) ->
           status = res.statusCode
           try
-            reply = ''
+            reply = "「#{area}」の警報・注意報発表情報" + new_line
             xml = jsdom.jsdom(body)
             for item, i in xml.getElementsByTagName("rss")[0].getElementsByTagName("channel")[0].getElementsByTagName("item")
               continue if i == 0  # 最初に広告のデータが入る
@@ -43,6 +43,4 @@ module.exports = (robot) ->
                 reply += new_line
           catch err
                 msg.send err
-
-          msg.send "「#{area}」の警報・注意報発表情報"
           msg.send reply

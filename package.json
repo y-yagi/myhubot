@@ -25,7 +25,8 @@
     "hubot-scripts": ">= 2.5.0 < 3.0.0",
     "hubot-idobata": "^0.1.0",
     "jsdom": "0.11.1",
-    "hubot-cron": "^0.2.5"
+    "hubot-cron": "^0.2.5",
+    "hubot-mackerel-notifier": "0.0.3"
   },
   "engines": {
     "node": ">= 0.8.x",
